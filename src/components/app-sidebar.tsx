@@ -39,6 +39,7 @@ import {
 } from "lucide-react";
 
 import Link from "next/link";
+import ToggleMode from "./toggleMode";
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/" },
   {
@@ -56,7 +57,7 @@ const menuItems = [
   { icon: Users, label: "Team", href: "/team" },
   { icon: Settings, label: "Settings", href: "/settings" },
   { icon: HelpCircle, label: "Help", href: "/help" },
-  { icon: LogOut, label: "Logout", href: "/logout" },
+  // { icon: LogOut, label: "Logout", href: "/logout" },
 ];
 
 export function AppSidebar() {
@@ -72,7 +73,8 @@ export function AppSidebar() {
             <CheckSquare className="w-4 h-4 text-background" />
           </div>
           <span className="text-2xl font-medium tracking-tight group-data-[collapsible=icon]:hidden">
-            Task<span className="text-2xl text-green-700">ooo</span>
+            Task<span className="text-2xl text-green-700 me-22">ooo</span>
+            <ToggleMode />
           </span>
         </Link>
       </SidebarHeader>
@@ -141,7 +143,24 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter>
+        <SidebarMenuButton
+          className={cn(
+            "px-3 py-5 mb-2 text-gray-400 rounded-2xl transition-all duration-300",
+            pathname === "/logout"
+              ? "bg-green-700 text-white"
+              : "hover:bg-green-50 hover:px-4 hover:text-gray-950 ",
+          )}
+          asChild
+        >
+          <Link key={"Logout"} href={"/logout"}>
+            <LogOut className="w-4 h-4 shrink-0" />
+            <span className="group-data-[collapsible=icon]:hidden">
+              {"Logout"}
+            </span>
+          </Link>
+        </SidebarMenuButton>
+      </SidebarFooter>
     </Sidebar>
   );
 }
